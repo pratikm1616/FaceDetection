@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Student Login</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login_style.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		  {% with messages = get_flashed_messages() %}
+			{% if messages %}
+			  // Display a toast notification for each flashed message
+			  {% for message in messages %}
+				$('.toast-body').text('{{ message }}');
+				$('.toast').toast('show');
+			  {% endfor %}
+			{% endif %}
+		  {% endwith %}
+		});
+	  </script>
+</head>
+
+<body>
+	<div class="bg-image"></div>
+	<div class="container">
+		<h1>Student Login</h1>
+		<form action="{{ url_for('login') }}" method="POST">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" required>
+			</div>
+			<button type="submit" class="btn">Login</button>
+			<p class="forgot-password">Forgot your password? <a href="#">Click here</a></p>
+			<div class="toast-body"></div>
+		</form>
+	</div>
+</body>
+
+</html>
